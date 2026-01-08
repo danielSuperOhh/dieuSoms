@@ -1,11 +1,11 @@
 import { useState } from "react";
-import bag1 from "../assets/bag1.jpg";
-import bag2 from "../assets/bag2.jpg";
-import bag3 from "../assets/bag3.jpg";
-import bag4 from "../assets/bag4.jpg";
-import bag5 from "../assets/bag5.jpg";
-import bag6 from "../assets/bag6.jpg";
-import bag7 from "../assets/bag7.jpg";
+import bag1 from "../assets/bag1.JPG";
+import bag2 from "../assets/bag2.JPG";
+import bag3 from "../assets/bag3.JPG";
+import bag4 from "../assets/bag4.JPG";
+import bag5 from "../assets/bag5.JPG";
+import bag6 from "../assets/bag6.JPG";
+import bag7 from "../assets/bag7.JPG";
 
 const images = [bag1, bag2, bag3, bag4, bag5, bag6, bag7];
 
