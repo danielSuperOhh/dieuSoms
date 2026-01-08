@@ -1,4 +1,4 @@
-import dieuSoms from '../assets/dieuSoms.jpg'
+import dieuSoms from '../assets/dieuSoms.JPG'
 const Footer = () => {
   return (
     <footer className="bg-[#f6f1ec] text-gray-700 pt-16">
