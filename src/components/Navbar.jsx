@@ -7,7 +7,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 
-import dieuSoms from '../assets/dieuSoms.jpg'
+import dieuSoms from '../assets/dieuSoms.JPG'
 
 const Navbar = () => {
   const [active, setActive] = useState("Home");
