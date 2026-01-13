@@ -7,6 +7,11 @@ import bag5 from "../assets/bag5.JPG";
 import bag6 from "../assets/bag6.JPG";
 import bag7 from "../assets/bag7.JPG";
 
+import { useCart } from "../context/CartContext";
+
+import { ShoppingCartIcon } from "@heroicons/react/24/outline";
+
+
 const images = [bag1, bag2, bag3, bag4, bag5, bag6, bag7];
 
 const products = images.map((img, index) => ({
@@ -22,6 +27,9 @@ const products = images.map((img, index) => ({
 const Product = () => {
   const [showAll, setShowAll] = useState(false);
   const visibleProducts = showAll ? products : products.slice(0, 8);
+
+  const { addToCart } = useCart();
+
 
   return (
     <section className="py-16 sm:py-20 bg-[#faf7f3]">
@@ -49,16 +57,37 @@ const Product = () => {
                   group-hover:scale-105
                 "
               />
-              <button className="
-                absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2
-                px-4 sm:px-5 md:px-6 py-2
-                rounded-full
-                bg-white text-gray-900 text-xs sm:text-sm font-medium shadow
-                opacity-0 translate-y-4
-                group-hover:opacity-100 group-hover:translate-y-0
-                transition-all duration-300
-                hover:bg-[#a58071] hover:text-white
-              ">Add to Cart</button>
+              <button 
+                onClick={() => addToCart(product)}
+                className="
+                  hidden md:block
+                  absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2
+                  px-4 sm:px-5 md:px-6 py-2
+                  rounded-full
+                  bg-white text-gray-900 text-xs sm:text-sm font-medium shadow
+                  opacity-0 translate-y-4
+                  group-hover:opacity-100 group-hover:translate-y-0
+                  transition-all duration-300
+                  hover:bg-[#a58071] hover:text-white
+                "
+              >
+                Add to Cart
+              </button>
+
+              <button
+                onClick={() => addToCart(product)}
+                className="
+                  md:hidden
+                  absolute bottom-3 right-3
+                  w-11 h-11
+                  rounded-full
+                  bg-white shadow
+                  flex items-center justify-center
+                  active:scale-95 transition
+                "
+              >
+                <ShoppingCartIcon className="w-5 h-5 text-gray-800" />
+              </button>
             </div>
 
             <div className="pt-3 sm:pt-4 space-y-1.5 sm:space-y-2">
