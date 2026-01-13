@@ -57,11 +57,18 @@ const Navbar = ({ user }) => {
                 key={link}
                 href="#"
                 onClick={() => setActive(link)}
-                className={`relative inline-block after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-[#a58071] after:transition-all after:duration-300 hover:after:w-full ${
-                  active === link ? "after:w-full" : ""
-                }`}
+                className="inline-block"
               >
+                <span
+                  className={`relative inline-block pb-1
+                    after:absolute after:left-1/2 after:bottom-0 after:h-0.5 after:bg-[#a58071]
+                    after:w-0 after:-translate-x-1/2
+                    after:transition-all after:duration-300
+                    ${active === link ? "after:w-full" : "hover:after:w-full"}
+                  `}
+                >
                 {link}
+                </span>
               </a>
             ))}
 
@@ -161,21 +168,6 @@ const Navbar = ({ user }) => {
               />
             </div>
 
-            {/* Cart Row */}
-            {/* <div className="flex items-center justify-between">
-              <div 
-                onClick={() => setCartOpen(true)}
-                className="flex items-center gap-2">
-                <ShoppingCartIcon className="w-6 h-6 text-gray-700" />
-                <span className="font-medium">Cart</span>
-              </div>
-              {totalItems > 0 && (
-                <span className="bg-[#a58071] text-white text-xs px-2 py-1 rounded-full">
-                  {totalItems}
-                </span>
-              )}
-            </div> */}
-
             {/* User */}
             {!user ? (
               <div
@@ -209,15 +201,19 @@ const Navbar = ({ user }) => {
               <a
                 key={link}
                 href="#"
-                onClick={() => {
-                  setActive(link);
-                  setMenuOpen(false);
-                }}
-                className={`relative inline-block after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-[#a58071] after:transition-all after:duration-300 hover:after:w-full ${
-                  active === link ? "after:w-full" : ""
-                } py-1`}
+                onClick={() => setActive(link)}
+                className="inline-block"
               >
+                <span
+                  className={`relative inline-block pb-1
+                    after:absolute after:left-1/2 after:bottom-0 after:h-0.5 after:bg-[#a58071]
+                    after:w-0 after:-translate-x-1/2
+                    after:transition-all after:duration-300
+                    ${active === link ? "after:w-full" : "hover:after:w-full"}
+                  `}
+                >
                 {link}
+                </span>
               </a>
             ))}
           </div>
