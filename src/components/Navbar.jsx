@@ -163,7 +163,9 @@ const Navbar = ({ user }) => {
 
             {/* Cart Row */}
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
+              <div 
+                onClick={() => setCartOpen(true)}
+                className="flex items-center gap-2">
                 <ShoppingCartIcon className="w-6 h-6 text-gray-700" />
                 <span className="font-medium">Cart</span>
               </div>
