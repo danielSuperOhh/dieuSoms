@@ -15,6 +15,8 @@ import dieuSoms from "../assets/dieuSoms.JPG";
 
 import { useCart } from "../context/CartContext";
 
+import CartDrawer from "./CartDrawer";
+
 const Navbar = ({ user }) => {
   const [authOpen, setAuthOpen] = useState(false);
   const [authMode, setAuthMode] = useState("signin");
@@ -34,6 +36,8 @@ const Navbar = ({ user }) => {
 
   const { cartItems } = useCart();
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+
+  const [cartOpen, setCartOpen] = useState(false);
 
   return (
     <>
@@ -68,7 +72,9 @@ const Navbar = ({ user }) => {
               </button>
 
               {/* Cart */}
-              <button className="relative w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#a5807133] transition">
+              <button 
+                onClick={() => setCartOpen(true)}
+                className="relative w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#a5807133] transition">
                 <ShoppingCartIcon className="w-6 h-6 text-gray-700" />
                 {totalItems > 0 && (
                   <span className="absolute -top-1 -right-1 bg-[#a58071] text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
@@ -130,7 +136,9 @@ const Navbar = ({ user }) => {
           </div>
 
           {/* Cart */}
-          <button className="relative w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#a5807133] transition">
+          <button 
+            onClick={() => setCartOpen(true)}
+            className="relative w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#a5807133] transition">
             <ShoppingCartIcon className="w-6 h-6 text-gray-700" />
             {totalItems > 0 && (
               <span className="absolute -top-1 -right-1 bg-[#a58071] text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
@@ -220,6 +228,9 @@ const Navbar = ({ user }) => {
         mode={authMode}
         setMode={setAuthMode}
       />
+
+      <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
+
     </>
   );
 };
