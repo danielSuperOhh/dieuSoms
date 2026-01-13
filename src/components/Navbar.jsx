@@ -162,7 +162,7 @@ const Navbar = ({ user }) => {
             </div>
 
             {/* Cart Row */}
-            <div className="flex items-center justify-between">
+            {/* <div className="flex items-center justify-between">
               <div 
                 onClick={() => setCartOpen(true)}
                 className="flex items-center gap-2">
@@ -174,7 +174,7 @@ const Navbar = ({ user }) => {
                   {totalItems}
                 </span>
               )}
-            </div>
+            </div> */}
 
             {/* User */}
             {!user ? (
