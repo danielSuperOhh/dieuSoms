@@ -4,7 +4,7 @@ const Banner = () => {
   return (
     <div className="relative w-full h-[60vh] md:h-[66vh] overflow-hidden">
       <div
-        className="absolute inset-0 bg-fixed bg-center bg-cover"
+        className="absolute inset-0 bg-fixed bg-bottm bg-cover"
         style={{
           backgroundImage: `url(${banner})`,
           backgroundPosition: "50% 100%",
