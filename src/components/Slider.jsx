@@ -27,7 +27,7 @@ const Slider = () => {
   // Duplicate products 3x for seamless infinite effect
   const extendedProducts = [...products, ...products, ...products];
 
-  const scrollAmount = 340; // same as before
+  const scrollAmount = 340;
 
   const scroll = (direction) => {
     if (!sliderRef.current) return;
@@ -41,41 +41,22 @@ const Slider = () => {
     const slider = sliderRef.current;
     if (!slider) return;
 
-    // Start in the middle
-    const productWidth = scrollAmount;
-    const middle = (slider.scrollWidth / 3);
-    slider.scrollLeft = middle;
+    // Start in the middle for infinite effect
+    slider.scrollLeft = slider.scrollWidth / 3;
 
-    // Infinite scroll adjustment
+    // Infinite scroll adjustment when user scrolls manually
     const handleScroll = () => {
-      if (slider.scrollLeft >= slider.scrollWidth * 2 / 3) {
+      if (slider.scrollLeft >= (slider.scrollWidth * 2) / 3) {
         slider.scrollLeft -= slider.scrollWidth / 3;
       } else if (slider.scrollLeft <= 0) {
         slider.scrollLeft += slider.scrollWidth / 3;
       }
     };
+
     slider.addEventListener("scroll", handleScroll);
-
-    // Automatic scrolling
-    let autoScroll = setInterval(() => {
-      slider.scrollBy({ left: 1, behavior: "smooth" });
-    }, 16); // ~60fps, smooth auto scroll
-
-    // Pause auto-scroll on hover
-    const handleMouseEnter = () => clearInterval(autoScroll);
-    const handleMouseLeave = () => {
-      autoScroll = setInterval(() => {
-        slider.scrollBy({ left: 1, behavior: "smooth" });
-      }, 16);
-    };
-    slider.addEventListener("mouseenter", handleMouseEnter);
-    slider.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
       slider.removeEventListener("scroll", handleScroll);
-      slider.removeEventListener("mouseenter", handleMouseEnter);
-      slider.removeEventListener("mouseleave", handleMouseLeave);
-      clearInterval(autoScroll);
     };
   }, []);
 
