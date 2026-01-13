@@ -1,8 +1,6 @@
-import { useRef } from "react";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import { useRef, useEffect } from "react";
+import { ChevronLeftIcon, ChevronRightIcon, ShoppingCartIcon } from "@heroicons/react/24/outline";
 import { useCart } from "../context/CartContext";
-import { ShoppingCartIcon } from "@heroicons/react/24/outline";
-
 
 import bag1 from "../assets/bag1.JPG";
 import bag2 from "../assets/bag2.JPG";
@@ -26,13 +24,60 @@ const Slider = () => {
   const sliderRef = useRef(null);
   const { addToCart } = useCart();
 
+  // Duplicate products 3x for seamless infinite effect
+  const extendedProducts = [...products, ...products, ...products];
+
+  const scrollAmount = 340; // same as before
+
   const scroll = (direction) => {
-    const amount = 340;
+    if (!sliderRef.current) return;
     sliderRef.current.scrollBy({
-      left: direction === "left" ? -amount : amount,
+      left: direction === "left" ? -scrollAmount : scrollAmount,
       behavior: "smooth",
     });
   };
+
+  useEffect(() => {
+    const slider = sliderRef.current;
+    if (!slider) return;
+
+    // Start in the middle
+    const productWidth = scrollAmount;
+    const middle = (slider.scrollWidth / 3);
+    slider.scrollLeft = middle;
+
+    // Infinite scroll adjustment
+    const handleScroll = () => {
+      if (slider.scrollLeft >= slider.scrollWidth * 2 / 3) {
+        slider.scrollLeft -= slider.scrollWidth / 3;
+      } else if (slider.scrollLeft <= 0) {
+        slider.scrollLeft += slider.scrollWidth / 3;
+      }
+    };
+    slider.addEventListener("scroll", handleScroll);
+
+    // Automatic scrolling
+    let autoScroll = setInterval(() => {
+      slider.scrollBy({ left: 1, behavior: "smooth" });
+    }, 16); // ~60fps, smooth auto scroll
+
+    // Pause auto-scroll on hover
+    const handleMouseEnter = () => clearInterval(autoScroll);
+    const handleMouseLeave = () => {
+      autoScroll = setInterval(() => {
+        slider.scrollBy({ left: 1, behavior: "smooth" });
+      }, 16);
+    };
+    slider.addEventListener("mouseenter", handleMouseEnter);
+    slider.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      slider.removeEventListener("scroll", handleScroll);
+      slider.removeEventListener("mouseenter", handleMouseEnter);
+      slider.removeEventListener("mouseleave", handleMouseLeave);
+      clearInterval(autoScroll);
+    };
+  }, []);
 
   return (
     <section className="relative py-20 bg-[#faf7f3]">
@@ -59,9 +104,12 @@ const Slider = () => {
         <ChevronRightIcon className="w-5 h-5 text-gray-700" />
       </button>
 
-      <div ref={sliderRef} className="flex gap-6 overflow-x-auto scroll-smooth px-20 no-scrollbar">
-        {products.map((product) => (
-          <div key={product.id} className="min-w-70 md:min-w-75 bg-transparent">
+      <div
+        ref={sliderRef}
+        className="flex gap-6 overflow-x-auto scroll-smooth px-20 no-scrollbar"
+      >
+        {extendedProducts.map((product, index) => (
+          <div key={index} className="min-w-70 md:min-w-75 bg-transparent">
             <div className="relative overflow-hidden group">
               <img
                 src={product.image}
@@ -69,36 +117,36 @@ const Slider = () => {
                 className="w-full h-95 object-cover transition-transform duration-500 group-hover:scale-105"
               />
 
-          <button
-              onClick={() => addToCart(product)}
-              className="
-                hidden md:block
-                absolute bottom-4 left-1/2 -translate-x-1/2
-                px-6 py-2 rounded-full bg-white text-gray-900 text-sm font-medium shadow
-                opacity-0 translate-y-4
-                group-hover:opacity-100 group-hover:translate-y-0
-                transition-all duration-300
-                hover:bg-[#a58071] hover:text-white
-              "
-            >
-              Add to Cart
-            </button>
+              <button
+                onClick={() => addToCart(product)}
+                className="
+                  hidden md:block
+                  absolute bottom-4 left-1/2 -translate-x-1/2
+                  px-6 py-2 rounded-full bg-white text-gray-900 text-sm font-medium shadow
+                  opacity-0 translate-y-4
+                  group-hover:opacity-100 group-hover:translate-y-0
+                  transition-all duration-300
+                  hover:bg-[#a58071] hover:text-white
+                "
+              >
+                Add to Cart
+              </button>
 
-            {/* Mobile Floating Icon */}
-            <button
-              onClick={() => addToCart(product)}
-              className="
-                md:hidden
-                absolute bottom-3 right-3
-                w-11 h-11
-                rounded-full
-                bg-white shadow
-                flex items-center justify-center
-                active:scale-95 transition
-              "
-            >
-              <ShoppingCartIcon className="w-5 h-5 text-gray-800" />
-            </button>            
+              {/* Mobile Floating Icon */}
+              <button
+                onClick={() => addToCart(product)}
+                className="
+                  md:hidden
+                  absolute bottom-3 right-3
+                  w-11 h-11
+                  rounded-full
+                  bg-white shadow
+                  flex items-center justify-center
+                  active:scale-95 transition
+                "
+              >
+                <ShoppingCartIcon className="w-5 h-5 text-gray-800" />
+              </button>
             </div>
 
             <div className="pt-4 space-y-2">
