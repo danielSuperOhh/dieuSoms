@@ -122,10 +122,11 @@ const Shop = () => {
             </div>
 
             <div className="pt-4 space-y-1 pb-20">
-              <div className="flex justify-between">
-                <h3 className="text-sm font-medium truncate">{product.name}</h3>
-                <span className="text-sm">⭐ {product.rating}</span>
-              </div>
+                <div className="flex items-center justify-between gap-2">
+                    <h3 className="font-medium text-gray-900 text-xs sm:text-sm truncate">{product.name}</h3>
+                    <span className="text-xs sm:text-sm text-gray-700 shrink-0">⭐ {product.rating}</span>
+                </div>
+
 
               <div className="flex gap-2 text-sm">
                 <span className="text-[#a58071]">£{product.price.toFixed(2)}</span>

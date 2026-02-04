@@ -154,9 +154,9 @@ const Slider = () => {
             </div>
 
             <div className="pt-4 space-y-2">
-              <div className="flex items-center justify-between">
-                <h3 className="font-medium text-gray-900 text-sm">{product.name}</h3>
-                <span className="text-sm text-gray-700">⭐ {product.rating}</span>
+              <div className="flex items-center justify-between gap-2">
+                <h3 className="font-medium text-gray-900 text-xs sm:text-sm truncate">{product.name}</h3>
+                <span className="text-xs sm:text-sm text-gray-700 shrink-0">⭐ {product.rating}</span>
               </div>
 
               <div className="flex items-center gap-2 text-sm">

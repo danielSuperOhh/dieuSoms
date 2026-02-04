@@ -11,18 +11,38 @@ import { useCart } from "../context/CartContext";
 
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 
+const bagNames = [
+  "Willow Crochet Tote",
+  "Luna Handwoven Bag",
+  "Sienna Crochet Shoulder Bag",
+  "Olive Market Tote",
+  "Aurora Knit Crossbody",
+  "Marigold Crochet Pouch",
+  "Ember Boho Bag",
+]
 
 const images = [bag1, bag2, bag3, bag4, bag5, bag6, bag7];
 
-const products = images.map((img, index) => ({
-  id: index + 1,
-  name: `Crochet ${index + 1}`,
-  price: "£23.00",
-  oldPrice: index % 2 === 0 ? "£34.00" : null,
+// const products = images.map((img, index) => ({
+//   id: index + 1,
+//   name: `Crochet ${index + 1}`,
+//   price: "£23.00",
+//   oldPrice: index % 2 === 0 ? "£34.00" : null,
+//   rating: (4 + Math.random()).toFixed(1),
+//   colors: Math.floor(Math.random() * 12) + 3,
+//   image: img,
+// }));
+
+const products = Array.from({ length: 7 }).map((_, i) => ({
+  id: i + 1,
+  name: bagNames[i % bagNames.length],
+  price: 23,
+  oldPrice: i % 3 === 0 ? 34 : null,
   rating: (4 + Math.random()).toFixed(1),
-  colors: Math.floor(Math.random() * 12) + 3,
-  image: img,
+  colors: Math.floor(Math.random() * 8) + 3,
+  image: images[i % images.length],
 }));
+
 
 const Product = () => {
   const [showAll, setShowAll] = useState(false);
@@ -95,9 +115,13 @@ const Product = () => {
                 <h3 className="font-medium text-gray-900 text-xs sm:text-sm truncate">{product.name}</h3>
                 <span className="text-xs sm:text-sm text-gray-700 shrink-0">⭐ {product.rating}</span>
               </div>
-              <div className="flex items-center gap-2 text-xs sm:text-sm">
-                <span className="text-[#a58071] font-medium">{product.price}</span>
-                {product.oldPrice && <span className="line-through text-gray-400">{product.oldPrice}</span>}
+             <div className="flex gap-2 text-sm">
+                <span className="text-[#a58071]">£{product.price.toFixed(2)}</span>
+                {product.oldPrice && (
+                  <span className="line-through text-gray-400">
+                    £{product.oldPrice.toFixed(2)}
+                  </span>
+                )}
               </div>
               <p className="text-[10px] sm:text-xs text-gray-500">{product.colors} colors available</p>
             </div>
