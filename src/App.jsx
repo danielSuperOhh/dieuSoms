@@ -6,6 +6,8 @@ import { auth } from "./firebase";
 import "./App.css";
 import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
+import Shop from "./pages/Shop";
+import Trending from "./pages/Trending";
 // import Checkout from "./pages/Checkout"; // later
 
 function App() {
@@ -32,6 +34,9 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/shop" element={<Shop />} />
+        <Route path="/trending" element={<Trending />} />
+
         {/* <Route path="/checkout" element={<Checkout />} /> */}
       </Routes>
     </>

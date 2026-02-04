@@ -10,14 +10,37 @@ import bag5 from "../assets/bag5.JPG";
 import bag6 from "../assets/bag6.JPG";
 import bag7 from "../assets/bag7.JPG";
 
+const bagNames = [
+  "Willow Crochet Tote",
+  "Luna Handwoven Bag",
+  "Sienna Crochet Shoulder Bag",
+  "Olive Market Tote",
+  "Aurora Knit Crossbody",
+  "Marigold Crochet Pouch",
+  "Ember Boho Bag",
+  "Solstice Crochet Carryall",
+  "Daisy Mini Crochet Bag",
+  "Ivy Everyday Tote",
+  "Nola Crochet Handbag",
+  "Cleo Woven Shoulder Bag",
+  "Harper Soft Crochet Tote",
+  "Zara Bohemian Bag",
+  "Mila Crochet Crossbody",
+  "Opal Weekend Tote",
+  "Aria Handcrafted Bag",
+  "Indie Crochet Sling",
+  "Nova Crochet Satchel",
+  "Rhea Artisan Tote",
+];
+
 const products = [
-  { id: 1, name: "Crochet 1", price: 23, oldPrice: 34, rating: 4.4, colors: 16, image: bag1 },
-  { id: 2, name: "Crochet 2", price: 19, oldPrice: 23, rating: 5.0, colors: 3, image: bag2 },
-  { id: 3, name: "Crochet 3", price: 23, oldPrice: 31, rating: 4.8, colors: 9, image: bag3 },
-  { id: 4, name: "Crochet 4", price: 27, rating: 4.3, colors: 12, image: bag4 },
-  { id: 5, name: "Crochet 5", price: 21, rating: 4.6, colors: 7, image: bag5 },
-  { id: 6, name: "Crochet 6", price: 16, rating: 4, colors: 7, image: bag6 },
-  { id: 7, name: "Crochet 7", price: 21, rating: 4.2, colors: 2, image: bag7 },
+  { id: 1, name: bagNames[0], price: 23, oldPrice: 34, rating: 4.4, colors: 16, image: bag1 },
+  { id: 2, name: bagNames[1], price: 19, oldPrice: 23, rating: 5.0, colors: 3, image: bag2 },
+  { id: 3, name: bagNames[2], price: 23, oldPrice: 31, rating: 4.8, colors: 9, image: bag3 },
+  { id: 4, name: bagNames[3], price: 27, rating: 4.3, colors: 12, image: bag4 },
+  { id: 5, name: bagNames[4], price: 21, rating: 4.6, colors: 7, image: bag5 },
+  { id: 6, name: bagNames[5], price: 16, rating: 4.0, colors: 7, image: bag6 },
+  { id: 7, name: bagNames[6], price: 21, rating: 4.2, colors: 2, image: bag7 },
 ];
 
 const Slider = () => {
