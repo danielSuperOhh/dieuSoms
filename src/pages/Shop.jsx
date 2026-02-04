@@ -73,7 +73,7 @@ const Shop = () => {
   const { addToCart } = useCart();
   const { query } = useSearch();
 
-  // ✅ SEARCH FILTER
+  // SEARCH FILTER
   const filteredProducts = products.filter(product =>
     product.name.toLowerCase().includes(query.toLowerCase())
   );
@@ -121,7 +121,7 @@ const Shop = () => {
               </button>
             </div>
 
-            <div className="pt-4 space-y-1">
+            <div className="pt-4 space-y-1 pb-20">
               <div className="flex justify-between">
                 <h3 className="text-sm font-medium truncate">{product.name}</h3>
                 <span className="text-sm">⭐ {product.rating}</span>

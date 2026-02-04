@@ -16,7 +16,6 @@ import dieuSoms from "../assets/dieuSoms.JPG";
 
 import { useCart } from "../context/CartContext";
 import CartDrawer from "./CartDrawer";
-
 import { useSearch } from "../context/SearchContext";
 
 const Navbar = ({ user }) => {
@@ -49,7 +48,7 @@ const Navbar = ({ user }) => {
     setProfileOpen(false);
   };
 
-  // Close search when clicking outside
+  // Close desktop search when clicking outside
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (searchRef.current && !searchRef.current.contains(e.target)) {
@@ -64,6 +63,7 @@ const Navbar = ({ user }) => {
   return (
     <>
       <nav className="w-full bg-white [font-family:'Poiret One',sans-serif] sticky top-0 z-50">
+
         {/* ================= DESKTOP ================= */}
         <div className="hidden md:flex items-center justify-between px-12 h-40">
           {/* Logo */}
@@ -97,7 +97,10 @@ const Navbar = ({ user }) => {
               {/* SEARCH */}
               <div ref={searchRef} className="relative">
                 <button
-                  onClick={() => setSearchOpen((p) => !p)}
+                  onClick={() => {
+                    setSearchOpen((p) => !p);
+                    navigate("/shop");
+                  }}
                   className="w-10 h-10 rounded-full hover:bg-[#a5807133] flex items-center justify-center transition"
                 >
                   <MagnifyingGlassIcon className="w-6 h-6 text-gray-700" />
@@ -107,11 +110,10 @@ const Navbar = ({ user }) => {
                   <input
                     autoFocus
                     type="text"
+                    inputMode="search"
+                    enterKeyHint="search"
                     value={query}
-                    onChange={(e) => {
-                      setQuery(e.target.value);
-                      navigate("/shop");
-                    }}
+                    onChange={(e) => setQuery(e.target.value)}
                     placeholder="Search products…"
                     className="
                       absolute right-0 top-12
@@ -202,12 +204,11 @@ const Navbar = ({ user }) => {
           <div className="md:hidden px-4 pb-6 flex flex-col gap-4 bg-white shadow">
             <input
               type="text"
+              inputMode="search"
+              enterKeyHint="search"
               value={query}
-              onChange={(e) => {
-                setQuery(e.target.value);
-                navigate("/shop");
-                setMenuOpen(false);
-              }}
+              onFocus={() => navigate("/shop")}
+              onChange={(e) => setQuery(e.target.value)}
               placeholder="Search products…"
               className="border px-4 py-2 rounded-full"
             />
